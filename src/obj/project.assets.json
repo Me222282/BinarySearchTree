@@ -1,0 +1,164 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "Graphics/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Structs": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Graphics.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Graphics.dll": {}
+        }
+      },
+      "GUI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Graphics": "1.0.0",
+          "Structs": "1.0.0",
+          "Windowing": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/GUI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GUI.dll": {}
+        }
+      },
+      "Structs/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Structs.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Structs.dll": {}
+        }
+      },
+      "Windowing/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Graphics": "1.0.0",
+          "Structs": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Windowing.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Windowing.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Graphics/1.0.0": {
+      "type": "project",
+      "path": "../deps/Graphics/src/Graphics.csproj",
+      "msbuildProject": "../deps/Graphics/src/Graphics.csproj"
+    },
+    "GUI/1.0.0": {
+      "type": "project",
+      "path": "../deps/GUI/src/GUI.csproj",
+      "msbuildProject": "../deps/GUI/src/GUI.csproj"
+    },
+    "Structs/1.0.0": {
+      "type": "project",
+      "path": "../deps/Structs/src/Structs.csproj",
+      "msbuildProject": "../deps/Structs/src/Structs.csproj"
+    },
+    "Windowing/1.0.0": {
+      "type": "project",
+      "path": "../deps/Windowing/src/Windowing.csproj",
+      "msbuildProject": "../deps/Windowing/src/Windowing.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "GUI >= 1.0.0",
+      "Graphics >= 1.0.0",
+      "Structs >= 1.0.0",
+      "Windowing >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Owen\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "H:\\Documents\\Programming\\code\\BinarySearchTree\\src\\BinarySearchTree.csproj",
+      "projectName": "BinarySearchTree",
+      "projectPath": "H:\\Documents\\Programming\\code\\BinarySearchTree\\src\\BinarySearchTree.csproj",
+      "packagesPath": "C:\\Users\\Owen\\.nuget\\packages\\",
+      "outputPath": "H:\\Documents\\Programming\\code\\BinarySearchTree\\src\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Owen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "H:\\Documents\\Programming\\code\\BinarySearchTree\\deps\\Graphics\\src\\Graphics.csproj": {
+              "projectPath": "H:\\Documents\\Programming\\code\\BinarySearchTree\\deps\\Graphics\\src\\Graphics.csproj"
+            },
+            "H:\\Documents\\Programming\\code\\BinarySearchTree\\deps\\GUI\\src\\GUI.csproj": {
+              "projectPath": "H:\\Documents\\Programming\\code\\BinarySearchTree\\deps\\GUI\\src\\GUI.csproj"
+            },
+            "H:\\Documents\\Programming\\code\\BinarySearchTree\\deps\\Structs\\src\\Structs.csproj": {
+              "projectPath": "H:\\Documents\\Programming\\code\\BinarySearchTree\\deps\\Structs\\src\\Structs.csproj"
+            },
+            "H:\\Documents\\Programming\\code\\BinarySearchTree\\deps\\Windowing\\src\\Windowing.csproj": {
+              "projectPath": "H:\\Documents\\Programming\\code\\BinarySearchTree\\deps\\Windowing\\src\\Windowing.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

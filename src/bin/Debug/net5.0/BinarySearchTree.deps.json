@@ -1,0 +1,81 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "BinarySearchTree/1.0.0": {
+        "dependencies": {
+          "GUI": "1.0.0",
+          "Graphics": "1.0.0",
+          "Structs": "1.0.0",
+          "Windowing": "1.0.0"
+        },
+        "runtime": {
+          "BinarySearchTree.dll": {}
+        }
+      },
+      "Graphics/1.0.0": {
+        "dependencies": {
+          "Structs": "1.0.0"
+        },
+        "runtime": {
+          "Graphics.dll": {}
+        }
+      },
+      "GUI/1.0.0": {
+        "dependencies": {
+          "Graphics": "1.0.0",
+          "Structs": "1.0.0",
+          "Windowing": "1.0.0"
+        },
+        "runtime": {
+          "GUI.dll": {}
+        }
+      },
+      "Structs/1.0.0": {
+        "runtime": {
+          "Structs.dll": {}
+        }
+      },
+      "Windowing/1.0.0": {
+        "dependencies": {
+          "Graphics": "1.0.0",
+          "Structs": "1.0.0"
+        },
+        "runtime": {
+          "Windowing.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BinarySearchTree/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Graphics/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GUI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Structs/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Windowing/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
