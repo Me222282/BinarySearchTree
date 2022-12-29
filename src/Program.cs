@@ -11,7 +11,7 @@ namespace BinarySearchTree
         {
             Core.Init();
             
-            Window w = new Program(200, 100, "WORK");
+            Window w = new Program(800, 500, "WORK");
             w.Run();
             
             Core.Terminate();

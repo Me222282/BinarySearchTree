@@ -65,19 +65,16 @@ namespace BinarySearchTree
                 _updateTree = false;
             }
             
-            //Framebuffer.Clear(BufferBit.Colour | BufferBit.Depth);
-            
             TextRenderer.Model = Matrix4.CreateScale(TextSize);
             
-            // Zoom and offset
-            Vector2 offset = _offset;
             if (_move)
             {
-                offset += MouseChange();
+                ViewPan += MouseChange();
+                _mouseOld = MouseLocation;
             }
-            TextRenderer.View = Matrix4.CreateTranslation((Vector3)offset) * Matrix4.CreateScale(_zoom);
-            _circleShader.Matrix2 = TextRenderer.View;
-            _shader.Matrix2 = TextRenderer.View;
+            
+            _circleShader.Matrix2 = Matrix4.Identity;
+            _shader.Matrix2 = Matrix4.Identity;
             
             _circleShader.Size = 1d;
             _circleShader.LineWidth = 0.05d;
@@ -134,34 +131,39 @@ namespace BinarySearchTree
             }
         }
         
-        private double _zoom = 1d;
-        private Vector2 _offset = Vector2.Zero;
         private Vector2 _mouseOld;
         private bool _move;
+        private const double _panValue = 20d;
         
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
             
-            _mouseOld = MouseLocation;
+            _mouseOld = e.Location;
             _move = true;
         }
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
             
-            if (_move)
-            {
-                _move = false;
-                _offset += MouseChange();
-            }
+            if (_move) { _move = false; }
         }
         
-        private Vector2 MouseChange()
+        private Vector2 MouseChange() => MouseLocation - _mouseOld;
+        
+        private void ZoomOnScreenPoint(Vector2 point, double zoom)
         {
-            Vector2 value = (MouseLocation - _mouseOld) / _zoom;
+            double newZoom = ViewScale + (zoom * 0.1 * ViewScale);
 
-            return value;
+            if (newZoom < 0) { return; }
+
+            double oldZoom = ViewScale;
+            ViewScale = newZoom;
+
+            Vector2 pointRelOld = (point - ViewPan) / oldZoom;
+            Vector2 pointRelNew = (point - ViewPan) / newZoom;
+
+            ViewPan += (pointRelNew - pointRelOld) * newZoom;
         }
         
         //private const double _minDist = 1d / 1_000_000d;
@@ -171,38 +173,57 @@ namespace BinarySearchTree
             
             if (this[Mods.Control])
             {
-                if (_move)
-                {
-                    _offset += MouseChange();
-                    _mouseOld = MouseLocation;
-                }
-
-                double newZoom = _zoom + (e.DeltaY * 0.1 * _zoom);
-
-                if (newZoom < 0) { return; }
-
-                double oldZoom = _zoom;
-                _zoom = newZoom;
-
-                // Zoom in on mouse
-
-                Vector2 mouse = MouseLocation;
-
-                Vector2 mouseRelOld = (mouse / oldZoom) - _offset;
-                Vector2 mouseRelNew = (mouse / _zoom) - _offset;
-
-                _offset += mouseRelNew - mouseRelOld;
+                ZoomOnScreenPoint(MouseLocation, e.DeltaY);
                 return;
             }
+            
+            // X pan
             if (this[Mods.Shift])
             {
-                _offset.X += e.DeltaY * 20d / _zoom;
+                ViewPan += (e.DeltaY * _panValue, 0d);
                 return;
             }
-            else
+            
+            // Y pan
+            ViewPan -= (0d, e.DeltaY * _panValue);
+        }
+        
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            
+            if (e[Keys.Left])
             {
-                _offset.Y -= e.DeltaY * 20d / _zoom;
+                ViewPan += (_panValue, 0d);
                 return;
+            }
+            if (e[Keys.Right])
+            {
+                ViewPan -= (_panValue, 0d);
+                return;
+            }
+            if (e[Keys.Up])
+            {
+                ViewPan -= (0d, _panValue);
+                return;
+            }
+            if (e[Keys.Down])
+            {
+                ViewPan += (0d, _panValue);
+                return;
+            }
+            if (e[Mods.Control])
+            {
+                if (e[Keys.Equal] || e[Keys.NumPadAdd])
+                {
+                    ZoomOnScreenPoint(0d, 1d);
+                    return;
+                }
+                if (e[Keys.Minus] || e[Keys.NumPadSubtract])
+                {
+                    ZoomOnScreenPoint(0d, -1d);
+                    return;
+                }
             }
         }
     }
