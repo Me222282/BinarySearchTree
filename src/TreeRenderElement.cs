@@ -79,6 +79,7 @@ namespace BinarySearchTree
             _circleShader.Matrix2 = TextRenderer.View;
             _shader.Matrix2 = TextRenderer.View;
             
+            _circleShader.Size = 1d;
             _circleShader.LineWidth = 0.05d;
             _circleShader.ColourSource = ColourSource.UniformColour;
             _circleShader.Colour = new ColourF(1f, 1f, 1f);
@@ -87,6 +88,7 @@ namespace BinarySearchTree
             // Depth always passes
             State.DepthFunction = DepthFunction.Always;
             
+            _circleShader.Matrix3 = Projection;
             DrawNode(_tree._source, 0d);
             
             // Depth passes when nothing is written
@@ -98,14 +100,8 @@ namespace BinarySearchTree
             _shader.ColourSource = ColourSource.UniformColour;
             _shader.Colour = new ColourF(1f, 1f, 1f);
             _shader.Matrix1 = Matrix4.Identity;
-            _lines.Draw<Vector2>(DrawMode.Lines, 0);
-        }
-        protected override void OnSizeChange(VectorEventArgs e)
-        {
-            base.OnSizeChange(e);
-            
-            _circleShader.Matrix3 = Projection;
             _shader.Matrix3 = Projection;
+            _lines.Draw<Vector2>(DrawMode.Lines, 0);
         }
         
         private void DrawNode(DistanceTree.Node n, Vector2 pos)

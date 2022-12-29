@@ -56,3 +56,4 @@ H:\Documents\Programming\code\BinarySearchTree\src\obj\Debug\net5.0\BinarySearch
 H:\Documents\Programming\code\BinarySearchTree\src\obj\Debug\net5.0\ref\BinarySearchTree.dll
 H:\Documents\Programming\code\BinarySearchTree\src\obj\Debug\net5.0\BinarySearchTree.pdb
 H:\Documents\Programming\code\BinarySearchTree\src\obj\Debug\net5.0\BinarySearchTree.genruntimeconfig.cache
+H:\Documents\Programming\code\BinarySearchTree\src\bin\Debug\net5.0\GUI.xml

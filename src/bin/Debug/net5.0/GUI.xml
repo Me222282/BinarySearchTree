@@ -1,0 +1,37 @@
+<RootElement>
+    <TreeRenderElement />
+    <Container Layout="MenuLayout(60)" Colour="ColourF(0.208, 0.216, 0.224)">
+    
+        <Button Layout="Layout(-0.67, 0, 0.2, 1.4)" Click="AddNode()">
+            <Property Name="Colour" Value="ColourF(0.667, 0.753, 0.89)" />
+            <Property Name="BorderColour" Value="ColourF(0.51, 0.557, 0.694)" />
+            Add
+        </Button>
+        
+        <Button Layout="Layout(-0.43, 0, 0.2, 1.4)" Click="DeleteNode()">
+            <Property Name="Colour" Value="ColourF(0.667, 0.753, 0.89)" />
+            <Property Name="BorderColour" Value="ColourF(0.51, 0.557, 0.694)" />
+            Delete
+        </Button>
+        
+        <TextInput Layout="TextLayout(5, 5, 0, 0, 50, 0, true)">
+            <Property Name="TextSize" Value="30" />
+            <Property Name="CornerRadius" Value="0.2" />
+            <Property Name="BackgroundColour" Value="ColourF(0, 0, 0)" />
+            <Property Name="SingleLine" Value="true" />
+        </TextInput>
+        
+        <Button Layout="Layout(0.5, 0, 0.2, 1.4)" Click="FindNode()">
+            <Property Name="Colour" Value="ColourF(0.667, 0.753, 0.89)" />
+            <Property Name="BorderColour" Value="ColourF(0.51, 0.557, 0.694)" />
+            Find
+        </Button>
+        
+        <Button Layout="Layout(0.74, 0, 0.2, 1.4)" Click="ClearTree()">
+            <Property Name="Colour" Value="ColourF(0.667, 0.753, 0.89)" />
+            <Property Name="BorderColour" Value="ColourF(0.51, 0.557, 0.694)" />
+            Clear
+        </Button>
+        
+    </Container>
+</RootElement>
