@@ -21,7 +21,6 @@
             <Property Name="CornerRadius" Value="0.2" />
             <Property Name="BackgroundColour" Value="ColourF(0, 0, 0)" />
             <Property Name="SingleLine" Value="true" />
-            Look at ME!
         </TextInput>
         
         <Button Layout="TextLayout(5, 5, 0, 0, 0.2, 1.4, true)" Click="FindNode()">
