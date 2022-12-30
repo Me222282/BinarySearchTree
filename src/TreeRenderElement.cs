@@ -133,7 +133,7 @@ namespace BinarySearchTree
         
         private Vector2 _mouseOld;
         private bool _move;
-        private const double _panValue = 20d;
+        private const double _panValue = 30d;
         
         protected override void OnMouseDown(MouseEventArgs e)
         {
