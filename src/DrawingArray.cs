@@ -31,12 +31,12 @@ namespace BinarySearchTree
             VertexAttribPointer(index, attributeSize, dataType, false, stride, dataStart);
         }
         
-        public void Draw(DrawMode mode, int first, int size) => DrawArrays(mode, first, size);
-        public void Draw<T>(DrawMode mode, int index) where T : unmanaged
+        public void Draw(IDrawingContext context, DrawMode mode, int first, int size) => context.DrawArrays(this, mode, first, size);
+        public void Draw<T>(IDrawingContext context, DrawMode mode, int index) where T : unmanaged
         {
             ArrayBuffer<T> buffer = (ArrayBuffer<T>)Properties.GetBuffer(index);
             
-            DrawArrays(mode, 0, buffer.Size);
+            context.DrawArrays(this, mode, 0, buffer.Size);
         }
         
         [ThreadStatic]

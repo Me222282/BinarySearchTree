@@ -10,9 +10,13 @@ namespace BinarySearchTree
     {
         public TreeRenderElement()
         {
-            _font = SampleFont.GetInstance();
-            _shader = BasicShader.GetInstance();
-            _circleShader = CircleShader.GetInstance();
+            Graphics = new LocalGraphics(this, OnRender)
+            {
+                RendersWithScale = true,
+                RendersWithOffset = true
+            };
+            _font = Shapes.SampleFont;
+            _shader = Shapes.BasicShader;
             
             UpdateDrawingTree();
             
@@ -21,7 +25,8 @@ namespace BinarySearchTree
             CursorStyle = Cursor.ResizeAll;
         }
         
-        private BasicShader _shader { get; }
+        public override GraphicsManager Graphics { get; }
+        private BasicShader _shader;
         
         public BinarySearchTree.Node SelectedNode { get; set; }= null;
         
@@ -37,7 +42,6 @@ namespace BinarySearchTree
         }
         
         private readonly Font _font;
-        private readonly CircleShader _circleShader;
         private DrawingArray _lines;
         
         private DistanceTree _tree;
@@ -55,9 +59,9 @@ namespace BinarySearchTree
             _lines = DrawingArray.Create(_tree, _xDist, _yDist);
         }
         
-        protected override void OnUpdate(FrameEventArgs e)
+        public void OnRender(object sender, RenderArgs e)
         {
-            base.OnUpdate(e);
+            IDrawingContext context = e.Context;
             
             if (_updateTree)
             {
@@ -65,69 +69,50 @@ namespace BinarySearchTree
                 _updateTree = false;
             }
             
-            TextRenderer.Model = Matrix4.CreateScale(TextSize);
-            
             if (_move)
             {
                 ViewPan += MouseChange();
                 _mouseOld = MouseLocation;
             }
             
-            _circleShader.Matrix2 = Matrix4.Identity;
-            _shader.Matrix2 = Matrix4.Identity;
-            
-            _circleShader.Size = 1d;
-            _circleShader.LineWidth = 0.05d;
-            _circleShader.ColourSource = ColourSource.UniformColour;
-            _circleShader.Colour = new ColourF(1f, 1f, 1f);
-            
-            State.DepthTesting = true;
-            // Depth always passes
-            State.DepthFunction = DepthFunction.Always;
-            
-            _circleShader.Matrix3 = Projection;
-            DrawNode(_tree._source, 0d);
-            
-            // Depth passes when nothing is written
-            State.DepthFunction = DepthFunction.Less;
+            context.View = Matrix.Identity;
             
             // Draw lines
             
-            _shader.Bind();
+            context.Shader = _shader;
             _shader.ColourSource = ColourSource.UniformColour;
-            _shader.Colour = new ColourF(1f, 1f, 1f);
-            _shader.Matrix1 = Matrix4.Identity;
-            _shader.Matrix3 = Projection;
-            _lines.Draw<Vector2>(DrawMode.Lines, 0);
+            _shader.Colour = ColourF.White;
+            context.Model = Matrix.Identity;
+            _lines.Draw<Vector2>(context, DrawMode.Lines, 0);
+            
+            DrawNode(context, e.TextRenderer, _tree._source, 0d);
         }
         
-        private void DrawNode(DistanceTree.Node n, Vector2 pos)
+        private void DrawNode(IDrawingContext context, TextRenderer tr, DistanceTree.Node n, Vector2 pos)
         {
             if (n == null) { return; }
             
             // Set colour if selected
             Colour c = n.Source == SelectedNode ? _selectColour : _baseColour;
-            TextRenderer.Colour = c;
-            _circleShader.Colour = c;
+            tr.Colour = c;
             
             // Offset matrix
-            TextRenderer.Model = Matrix4.CreateScale(TextSize) * Matrix4.CreateTranslation(pos);
+            context.Model = Matrix4.CreateScale(TextSize * 1.5d) * Matrix4.CreateTranslation(pos);
             
             // Circle border
-            _circleShader.Bind();
-            _circleShader.Matrix1 = Matrix4.CreateScale(TextSize * 1.5) * Matrix4.CreateTranslation(pos);
-            Shapes.Square.Draw();
+            context.DrawRing(new Box(0d, 1d), 0.05d, c, ColourF.Black);
             
             // Draw text
-            TextRenderer.DrawCentred(n.Source.Value.ToString(), _font, 0, 0);
+            context.Model = Matrix4.CreateScale(TextSize) * Matrix4.CreateTranslation(pos);
+            tr.DrawCentred(context, n.Source.Value.ToString(), _font, 0, 0);
             
             if (n.Greater != null)
             {
-                DrawNode(n.Greater, pos + (n.Greater.Offset * _xDist, _yDist));
+                DrawNode(context, tr, n.Greater, pos + (n.Greater.Offset * _xDist, _yDist));
             }
             if (n.Lesser != null)
             {
-                DrawNode(n.Lesser, pos + (n.Lesser.Offset * _xDist, _yDist));
+                DrawNode(context, tr, n.Lesser, pos + (n.Lesser.Offset * _xDist, _yDist));
             }
         }
         

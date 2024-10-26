@@ -22,12 +22,14 @@ namespace BinarySearchTree
         {
             LoadXml(File.ReadAllText("GUI.xml"));
             
-            _treeRender = Find<TreeRenderElement>();
-            _input = Find<TextInput>();
+            _treeRender = RecursiveFind<TreeRenderElement>();
+            _input = RecursiveFind<TextInput>();
+            _r = new Random();
         }
         
         private TreeRenderElement _treeRender;
         private TextInput _input;
+        private Random _r;
         
         private void AddNode(object sender, MouseEventArgs e) => AddNode();
         private bool AddNode()
@@ -92,6 +94,12 @@ namespace BinarySearchTree
             if (e[Keys.F] && this[Mods.Control])
             {
                 FindNode(this, null);
+                return;
+            }
+            
+            if (e[Keys.R] && this[Mods.Control])
+            {
+                _treeRender.Bst.Add(_r.Next(0, 100));
                 return;
             }
         }
