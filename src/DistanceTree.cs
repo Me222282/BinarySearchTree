@@ -11,14 +11,14 @@ namespace BinarySearchTree
         
         internal class Node
         {
-            public Node(double o, BinarySearchTree.Node src)
+            public Node(float o, BinarySearchTree.Node src)
             {
                 Offset = o;
                 Source = src;
             }
             
-            public double Offset;
-            public double Size;
+            public float Offset;
+            public float Size;
             
             public BinarySearchTree.Node Source;
             
@@ -43,14 +43,14 @@ namespace BinarySearchTree
             if (source.Source != null &&
                 source.Source.Greater == source)
             {
-                n.Offset = -(n.Lesser != null ? n.Lesser.Size : 0) + 1;
-                n.Size = (n.Greater != null ? n.Greater.Size : 0) + n.Offset;
+                n.Offset = -(n.Lesser != null ? n.Lesser.Size : 0f) + 1f;
+                n.Size = (n.Greater != null ? n.Greater.Size : 0f) + n.Offset;
             }
             else if (source.Source != null &&
                 source.Source.Lesser == source)
             {
-                n.Offset = -(n.Greater != null ? n.Greater.Size : 0) - 1;
-                n.Size = (n.Lesser != null ? n.Lesser.Size : 0) + n.Offset;
+                n.Offset = -(n.Greater != null ? n.Greater.Size : 0f) - 1f;
+                n.Size = (n.Lesser != null ? n.Lesser.Size : 0f) + n.Offset;
             }
             
             return n;

@@ -14,7 +14,7 @@ namespace BinarySearchTree
 
             buffer.Bind();
             EnableVertexAttribArray(index);
-            if (GL.Version >= 3.3)
+            if (GL.Version >= 3.3f)
             {
                 VertexAttribDivisor(index, 0);
             }
@@ -24,7 +24,7 @@ namespace BinarySearchTree
         {
             buffer.Bind();
             EnableVertexAttribArray(index);
-            if (GL.Version >= 3.3)
+            if (GL.Version >= 3.3f)
             {
                 VertexAttribDivisor(index, 0);
             }
@@ -40,16 +40,16 @@ namespace BinarySearchTree
         }
         
         [ThreadStatic]
-        private static double _xOff;
+        private static float _xOff;
         [ThreadStatic]
-        private static double _yOff;
-        public static DrawingArray Create(DistanceTree dt, double x, double y)
+        private static float _yOff;
+        public static DrawingArray Create(DistanceTree dt, float x, float y)
         {
             List<Vector2> lines = new List<Vector2>();
             _xOff = x;
             _yOff = y;
             
-            AddNode(dt._source, (0d, 0d), lines);
+            AddNode(dt._source, (0f, 0f), lines);
             
             // Buffer
             ArrayBuffer<Vector2> ab = new ArrayBuffer<Vector2>(1, BufferUsage.DrawFrequent);
@@ -60,7 +60,7 @@ namespace BinarySearchTree
             
             // Vertex array
             DrawingArray ad = new DrawingArray();
-            ad.AddBuffer(ab, 0, 0, DataType.Double, AttributeSize.D2);
+            ad.AddBuffer(ab, 0, 0, DataType.FloatV, AttributeSize.D2);
             
             return ad;
         }

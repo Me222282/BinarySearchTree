@@ -4,12 +4,12 @@ namespace BinarySearchTree
     {
         public class Node
         {
-            public Node(double v)
+            public Node(float v)
             {
                 Value = v;
             }
             
-            public double Value;
+            public float Value;
             
             public Node Source;
             
@@ -25,7 +25,7 @@ namespace BinarySearchTree
             _source = null;
         }
         
-        public void Add(double value)
+        public void Add(float value)
         {
             Node newNode = new Node(value);
             
@@ -76,7 +76,7 @@ namespace BinarySearchTree
             }
         }
         
-        public Node Find(double value)
+        public Node Find(float value)
         {
             Node current = _source;
             
@@ -103,7 +103,7 @@ namespace BinarySearchTree
             return current;
         }
         
-        public bool Remove(double value)
+        public bool Remove(float value)
         {
             Node v = Find(value);
             

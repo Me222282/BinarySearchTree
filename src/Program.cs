@@ -11,14 +11,14 @@ namespace BinarySearchTree
         {
             Core.Init();
             
-            Window w = new Program(800, 500, "WORK");
+            Window w = new Program(800, 500, "Binary Search Tree");
             w.Run();
             
             Core.Terminate();
         }
         
         public Program(int width, int height, string title)
-            : base(width, height, title, 4.3)
+            : base(width, height, title, 4.3f)
         {
             LoadXml(File.ReadAllText("GUI.xml"));
             
@@ -34,7 +34,7 @@ namespace BinarySearchTree
         private void AddNode(object sender, MouseEventArgs e) => AddNode();
         private bool AddNode()
         {
-            if (double.TryParse(_input.Text.ToString(), out double v))
+            if (float.TryParse(_input.Text.ToString(), out float v))
             {
                 _treeRender.Bst.Add(v);
                 _input.Text = "";
@@ -45,7 +45,7 @@ namespace BinarySearchTree
         }
         private void DeleteNode(object sender, MouseEventArgs e)
         {
-            if (double.TryParse(_input.Text.ToString(), out double v))
+            if (float.TryParse(_input.Text.ToString(), out float v))
             {
                 _treeRender.Bst.Remove(v);
                 _input.Text = "";
@@ -53,7 +53,7 @@ namespace BinarySearchTree
         }
         private void FindNode(object sender, MouseEventArgs e)
         {
-            if (double.TryParse(_input.Text.ToString(), out double v))
+            if (float.TryParse(_input.Text.ToString(), out float v))
             {
                 _treeRender.SelectedNode = _treeRender.Bst.Find(v);
                 _input.Text = "";
